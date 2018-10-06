@@ -45,7 +45,8 @@ namespace MDMWebApiTemplate
       app
         .UseHttpsRedirection()
         .UseMvc()
-        .ConfigureSwagger();
+        .ConfigureSwagger()
+        .UseCors(conf => conf.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
     }
   }
 }
