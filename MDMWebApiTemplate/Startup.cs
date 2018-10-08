@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json.Converters;
 using StartupPlugins;
 
 namespace MDMWebApiTemplate
@@ -27,7 +28,13 @@ namespace MDMWebApiTemplate
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+      services
+        .AddMvc()
+        .AddJsonOptions(opt =>
+        {
+          opt.SerializerSettings.Converters.Add(new StringEnumConverter() /* { CamelCaseText = true } */);
+        })
+        .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
       services.ConfigureSwaggerService();
     }
 
