@@ -38,6 +38,7 @@ namespace MDMWebApiTemplate
         })
         .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
       services.Configure<SettingsTest>(Configuration);
+      services.ConfigureDbConnection(Configuration);
       services.ConfigureSwaggerService();
     }
 

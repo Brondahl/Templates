@@ -7,6 +7,7 @@ using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
+using StartupPlugins;
 
 namespace MDMWebApiTemplate
 {
@@ -14,7 +15,9 @@ namespace MDMWebApiTemplate
   {
     public static void Main(string[] args)
     {
-      CreateWebHost(args).Run();
+      CreateWebHost(args)
+        .MigrateDatabase()
+        .Run();
     }
 
     public static IWebHost CreateWebHost(string[] args)
