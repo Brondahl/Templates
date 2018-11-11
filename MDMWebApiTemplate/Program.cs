@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace MDMWebApiTemplate
@@ -15,12 +14,15 @@ namespace MDMWebApiTemplate
   {
     public static void Main(string[] args)
     {
-      CreateWebHostBuilder(args).Build().Run();
+      CreateWebHost(args).Run();
     }
 
-    public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-        WebHost.CreateDefaultBuilder(args)
-            .ConfigureServices(c => c.AddAutofac())
-            .UseStartup<Startup>();
+    public static IWebHost CreateWebHost(string[] args)
+    {
+      return WebHost.CreateDefaultBuilder(args)
+        .ConfigureServices(c => c.AddAutofac())
+        .UseStartup<Startup>()
+        .Build();
+    }
   }
 }
