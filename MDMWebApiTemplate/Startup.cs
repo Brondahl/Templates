@@ -37,6 +37,7 @@ namespace MDMWebApiTemplate
           opt.SerializerSettings.Converters.Add(new StringEnumConverter() /* { CamelCaseText = true } */);
         })
         .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+      services.Configure<SettingsTest>(Configuration);
       services.ConfigureSwaggerService();
     }
 
