@@ -22,10 +22,19 @@ namespace MDMWebApiTemplate
 
     public static IWebHost CreateWebHost(string[] args)
     {
+      return CreateWebHostBuilder(args).Build();
+    }
+
+    /// <remarks>
+    /// Note that some frameworks (e.g. EntityFramework Core) rely
+    /// on finding this method by reflection and invoking it.
+    /// Thus refactoring can cause significant problems.  :(
+    /// </remarks>
+    public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+    {
       return WebHost.CreateDefaultBuilder(args)
         .ConfigureServices(c => c.AddAutofac())
-        .UseStartup<Startup>()
-        .Build();
+        .UseStartup<Startup>();
     }
   }
 }
