@@ -65,7 +65,12 @@ namespace MDMWebApiTemplate
       }
       else
       {
-        app.UseHsts();
+        var oneMonth = 60 * 60 * 24 * 30;
+        var policyCollection = new HeaderPolicyCollection()
+          .AddDefaultSecurityHeaders()
+          .AddStrictTransportSecurityMaxAgeIncludeSubDomains(maxAgeInSeconds: oneMonth); //https://www.tunetheweb.com/blog/dangerous-web-security-features/
+
+        app.UseSecurityHeaders(policyCollection);
       }
 
       app
